@@ -1,9 +1,10 @@
 const fs = require("fs");
 
-const p = "./pkg/package.json";
-const pp = require(p);
+const pkgPackageConfigFile = "./pkg/package.json";
+const pkg = require(pkgPackageConfigFile);
+const { name } = require("./package.json");
 
-const { main } = pp;
+const { main } = pkg;
 const esmMain = main.replace(".js", ".mjs");
 
 const cjs = fs.readFileSync(`./pkg/${main}`, "utf8");
@@ -27,12 +28,13 @@ const esm =
   ";export default module.exports;\n";
 
 fs.writeFileSync(`./pkg/${esmMain}`, esm);
-pp.files.push(esmMain);
+pkg.files.push(esmMain);
 
 fs.writeFileSync(
-  p,
+  pkgPackageConfigFile,
   JSON.stringify({
-    ...pp,
-    exports: { ".": { require: main, import: esmMain } },
+    ...pkg,
+    name,
+    exports: { ".": { require: `./${main}`, import: `./${esmMain}` } },
   })
 );
