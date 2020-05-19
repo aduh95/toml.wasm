@@ -1,9 +1,22 @@
 {
   "name": "@aduh95/toml",
+  "description": "This package contains methods for parsing Tom's Obvious, Minimal Language (TOML) and converting values to TOML.",
+  "keywords": [
+    "toml",
+    "webassembly",
+    "wasm",
+    "wasm-bindgen"
+  ],
   "license": "MIT",
   "private": true,
+  "homepage": "https://github.com/aduh95/toml.wasm",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/aduh95/toml.wasm.git"
+  },
   "scripts": {
     "build": "wasm-pack build --target nodejs && node ./createMJS.js",
+    "preversion": "echo 'Version number is set in Cargo.toml.' && exit 1",
     "test": "cp -r tests pkg && node pkg/tests/cjs.js && node pkg/tests/esm.mjs"
   }
 }

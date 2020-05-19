@@ -2,7 +2,7 @@ const fs = require("fs");
 
 const pkgPackageConfigFile = "./pkg/package.json";
 const pkg = require(pkgPackageConfigFile);
-const { name } = require("./package.json");
+const currentConfig = require("./package.json");
 
 const { main } = pkg;
 const esmMain = main.replace(".js", ".mjs");
@@ -45,7 +45,8 @@ fs.writeFileSync(
   pkgPackageConfigFile,
   JSON.stringify({
     ...pkg,
-    name,
+    ...currentConfig,
+    private: undefined,
     exports: { ".": { require: `./${main}`, import: `./${esmMain}` } },
   })
 );

@@ -1,6 +1,8 @@
 # toml
 
-Parses TOML documents and outputs JS object.
+This package contains methods for parsing
+[TOML](https://github.com/toml-lang/toml) documents and converting JS objects to
+TOML.
 
 ## Usage
 
@@ -71,4 +73,5 @@ You need [NodeJS](https://nodejs.org) and
 
 ```console
 $ npm run build
+$ npm run test
 ```
