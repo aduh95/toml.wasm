@@ -9,7 +9,7 @@ use wasm_bindgen::prelude::*;
 static ALLOC: wee_alloc::WeeAlloc = wee_alloc::WeeAlloc::INIT;
 
 #[wasm_bindgen]
-pub fn parse(input:&str) -> Result<JsValue, JsValue>{
+pub fn parse(input: &str) -> Result<JsValue, JsValue> {
     let val: toml::Value = toml::from_str(input)
       .map_err(|err| JsValue::from_str(&err.to_string()))?;
     let output = JsValue::from_serde(&val)
