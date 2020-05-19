@@ -31,7 +31,7 @@ const esm =
   "\n";
 
 function* getExports(input) {
-  const reg = /module\.exports\.([^_\s=]+) ?=/g;
+  const reg = /module\.exports\.([^_][^=]+)=/g;
   let results;
   while ((results = reg.exec(input)) !== null) {
     yield results[1];
