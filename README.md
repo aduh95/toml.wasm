@@ -1,16 +1,16 @@
-# toml2json
+# toml
 
-Parses TOML documents and outputs JSON.
+Parses TOML documents and outputs JS object.
 
 ## Usage
 
 ```js
-import { toml2json } from "@aduh95/toml2json";
+import TOML from "@aduh95/toml";
 
 console.log(
-  toml2json(`
+  TOML.parse(`
 [package]
-name = "@aduh95/toml2json"
+name = "@aduh95/toml"
 version = "0.1.0"
 
 [dependencies]
@@ -33,7 +33,7 @@ This outputs:
     "wasm-bindgen": "0.2"
   },
   "package": {
-    "name": "@aduh95/toml2json",
+    "name": "@aduh95/toml",
     "version": "0.1.0"
   }
 }

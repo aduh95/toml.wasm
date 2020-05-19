@@ -1,6 +1,6 @@
 [package]
-name = "@aduh95/toml2json"
-version = "0.1.0"
+name = "@aduh95/toml"
+version = "0.2.0"
 
 [dependencies]
 serde-transcode = "1.1.0"

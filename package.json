@@ -1,5 +1,5 @@
 {
-  "name": "@aduh95/toml2json",
+  "name": "@aduh95/toml",
   "license": "MIT",
   "private": true,
   "scripts": {

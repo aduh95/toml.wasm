@@ -23,9 +23,20 @@ const esm =
     .replace(
       "const bytes = require('fs').readFileSync",
       "import{readFileSync}from'fs';const bytes=readFileSync"
-    )
-    .replace(/module\.exports\.([^_])/g, (_, $1) => "export const " + $1) +
-  ";export default module.exports;\n";
+    ) +
+  ";export default module.exports;\n" +
+  [...getExports(cjs)]
+    .map((name) => `export const {${name}} = module.exports;`)
+    .join("\n") +
+  "\n";
+
+function* getExports(input) {
+  const reg = /module\.exports\.([^_\s=]+) ?=/g;
+  let results;
+  while ((results = reg.exec(input)) !== null) {
+    yield results[1];
+  }
+}
 
 fs.writeFileSync(`./pkg/${esmMain}`, esm);
 pkg.files.push(esmMain);
