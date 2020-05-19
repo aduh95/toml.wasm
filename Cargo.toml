@@ -1,6 +1,6 @@
 [package]
 name = "toml2js"
-version = "0.1.0"
+version = "0.2.0"
 authors = [
     "Antoine du Hamel <duhamelantoine199@gmail.com>",
     "Pascal Seitz <pascal.seitz@sap.com>"
