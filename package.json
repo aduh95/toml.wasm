@@ -14,9 +14,33 @@
     "type": "git",
     "url": "https://github.com/aduh95/toml.wasm.git"
   },
+  "exports": {
+    ".": {
+      "require": "./nodejs/toml2js.js",
+      "import": "./nodejs/toml2js.mjs",
+      "browser": "./web/toml2js.js"
+    }
+  },
+  "files": [
+    "nodejs/toml2js_bg.wasm",
+    "nodejs/toml2js.js",
+    "nodejs/toml2js_bg.js",
+    "nodejs/toml2js.d.ts",
+    "nodejs/toml2js.mjs",
+    "web/toml2js_bg.wasm",
+    "web/toml2js.js",
+    "web/toml2js.d.ts"
+  ],
   "scripts": {
-    "build": "wasm-pack build --target nodejs && node ./createMJS.js",
+    "build:cjs": "wasm-pack build --release --target nodejs -d nodejs",
+    "build:esm": "node ./createMJS.js",
+    "build:web": "wasm-pack build --release --target web -d web",
+    "build:all": "npm run build:cjs && npm run build:esm && npm run build:web",
+    "build": "npm run build:all && node ./updatePackage.json.js",
     "preversion": "echo 'Version number is set in Cargo.toml.' && exit 1",
     "test": "cp -r tests pkg && node pkg/tests/cjs.js && node pkg/tests/esm.mjs"
-  }
+  },
+  "main": "./nodejs/toml2js.js",
+  "module": "./web/toml2js.js",
+  "browser": "./web/toml2js.js"
 }

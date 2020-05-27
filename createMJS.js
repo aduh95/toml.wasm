@@ -1,13 +1,12 @@
 const fs = require("fs");
 
-const pkgPackageConfigFile = "./pkg/package.json";
+const pkgPackageConfigFile = "./nodejs/package.json";
 const pkg = require(pkgPackageConfigFile);
-const currentConfig = require("./package.json");
 
 const { main } = pkg;
-const esmMain = main.replace(".js", ".mjs");
+const esmMain = main.replace(/\.js$/, ".mjs");
 
-const cjs = fs.readFileSync(`./pkg/${main}`, "utf8");
+const cjs = fs.readFileSync(`./nodejs/${main}`, "utf8");
 
 const esm =
   "const module = {exports:{}};" +
@@ -38,15 +37,11 @@ function* getExports(input) {
   }
 }
 
-fs.writeFileSync(`./pkg/${esmMain}`, esm);
-pkg.files.push(esmMain);
+fs.writeFileSync(`./nodejs/${esmMain}`, esm);
 
-fs.writeFileSync(
-  pkgPackageConfigFile,
-  JSON.stringify({
-    ...pkg,
-    ...currentConfig,
-    private: undefined,
-    exports: { ".": { require: `./${main}`, import: `./${esmMain}` } },
-  })
-);
+// Mutate package.json
+pkg.module = esmMain;
+if (!pkg.files.includes(esmMain)) {
+  pkg.files.push(esmMain);
+}
+fs.writeFileSync(pkgPackageConfigFile, JSON.stringify(pkg));

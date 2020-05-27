@@ -2,5 +2,6 @@
 **/*.rs.bk
 Cargo.lock
 bin/
-pkg/
+web/
+nodejs/
 wasm-pack.log
