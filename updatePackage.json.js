@@ -8,7 +8,11 @@ const getFilesToDist = (folderName) =>
     (filePath) => `${folderName}/${filePath}`
   );
 
-pkg.files = [...getFilesToDist("nodejs"), ...getFilesToDist("web")];
+pkg.files = [
+  ...getFilesToDist("nodejs"),
+  ...getFilesToDist("web"),
+  "types.d.ts",
+];
 pkg.exports = {
   ".": {
     require: `./nodejs/${require("./nodejs/package.json").main}`,
@@ -25,4 +29,4 @@ fs.writeFileSync(
   JSON.stringify(pkg, null, 2) + "\n"
 );
 
-console.log("[INFO]: package.json has been updated.");
+console.log("[INFO]: package.json exports have been updated.");
