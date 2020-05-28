@@ -6,8 +6,10 @@ TOML.
 
 ## Usage
 
+### Node.js
+
 ```js
-import TOML from "@aduh95/toml";
+import * as TOML from "@aduh95/toml";
 
 console.log(
   TOML.parse(`
@@ -44,7 +46,7 @@ This outputs:
 You can also use the `stringify` method that outputs a TOML string:
 
 ```js
-import TOML from "@aduh95/toml";
+import * as TOML from "@aduh95/toml";
 
 console.log(
   TOML.stringify({
@@ -60,6 +62,52 @@ console.log(
     },
   })
 );
+```
+
+> If you are not using ECMAScript modules, you can use `require` instead of
+> `import`:
+>
+> ```js
+> const TOML = require("@aduh95/toml");
+> TOML.parse('Hello = "World!"');
+> ```
+
+#### Web browser
+
+_Works great on workers!_
+
+Main difference with Node.js API is that the WASM fetching and compilation
+happen asynchronously. You must call the `TOML.default` function before using
+the `parse` and `stringify` methods.
+
+```js
+import * as TOML from "https://unpckg.com/@aduh95/toml/web/toml2js.js";
+
+// Init the module
+await TOML.default();
+// Optionally, you can provide the absolute path to the WASM file
+// await TOML.default("https://unpckg.com/@aduh95/toml/web/toml2js_bg.wasm");
+
+const tomlString = TOML.stringify({
+  hello: "world!",
+});
+const jsObject = TOML.parse(`pi=3.1415`);
+```
+
+#### Deno
+
+Works same as the browser API.
+
+If you are working from your local file system, you can pass the WASM file
+directly to the `TOML.default` function in addition with the `--allow-read` CLI
+flag.
+
+```js
+import * as TOML from "/path/to/toml2js.js";
+// Init the module when the wasm file is on the file system
+const wasmFile = await Deno.open("/path/to/toml2js_bg.wasm");
+await TOML.default(await Deno.readAll(wasmFile));
+wasmFile.close();
 ```
 
 ### Limitations

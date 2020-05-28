@@ -39,7 +39,7 @@
     "build:all": "npm run build:cjs && npm run build:esm && npm run build:web",
     "build": "npm run build:all && node ./updatePackage.json.js",
     "preversion": "echo 'Version number is set in Cargo.toml.' && exit 1",
-    "test": "cp -r tests pkg && node pkg/tests/cjs.js && node pkg/tests/esm.mjs"
+    "test": "node tests/cjs.js && node tests/esm.mjs && deno test --allow-read tests/deno.ts"
   },
   "main": "./nodejs/toml2js.js",
   "module": "./web/toml2js.js",
