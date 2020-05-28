@@ -1,0 +1,51 @@
+# This workflow will do a clean install of node dependencies, build the source code and run tests across different versions of node
+# For more information see: https://help.github.com/actions/language-and-framework-guides/using-nodejs-with-github-actions
+
+name: CI
+
+on:
+  push:
+    branches: [master]
+  pull_request:
+    branches: [master]
+
+jobs:
+  build:
+    runs-on: ubuntu-latest
+
+    strategy:
+      matrix:
+        node: [14.x]
+        deno: [v1.0.2]
+
+    steps:
+      - uses: actions/checkout@v2
+      - run: sudo apt update
+      - name: Install wasm-pack
+        run:
+          curl https://rustwasm.github.io/wasm-pack/installer/init.sh -sSf | sh
+      - name: Install Node.js ${{ matrix.node }}
+        uses: actions/setup-node@v1
+        env:
+          RUNNER_TEMP: /tmp
+        with:
+          node-version: ${{ matrix.node }}
+      - name: Install Deno ${{ matrix.deno }}
+        run:
+          curl -fsSL https://deno.land/x/install/install.sh | sudo
+          DENO_INSTALL=/usr/local sh -s ${{ matrix.deno }}
+      - name: Build project
+        run: npm run build
+        env:
+          CI: true
+      - name: Run tests
+        run: npm run test
+      - name: Create tarball on success
+        if: success()
+        run: npm pack && mv aduh95-toml-*.tgz aduh95-toml-unreleased.tar.gz
+      - name: Upload artifact if tests are green
+        if: success()
+        uses: actions/upload-artifact@v1
+        with:
+          name: aduh95-toml-unreleased-${{ github.sha }}.tar.gz
+          path: aduh95-toml-unreleased.tar.gz
