@@ -34,10 +34,10 @@
   ],
   "scripts": {
     "build:cjs": "wasm-pack build --release --target nodejs -d nodejs",
-    "build:esm": "node ./createMJS.js",
+    "build:esm": "node ./scripts/createMJS.js",
     "build:web": "wasm-pack build --release --target web -d web",
     "build:all": "npm run build:cjs && npm run build:esm && npm run build:web",
-    "build": "npm run build:all && node ./updatePackage.json.js",
+    "build": "npm run build:all && node ./scripts/updatePackageExports.js",
     "preversion": "echo 'Version number is set in Cargo.toml.' && exit 1",
     "test": "node tests/cjs.js && node tests/esm.mjs && deno test --allow-read tests/deno.ts"
   },

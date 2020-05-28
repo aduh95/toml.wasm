@@ -1,12 +1,18 @@
-const fs = require("fs");
+#!/usr/bin/env node
+"use strict";
 
-const pkgPackageConfigFile = "./nodejs/package.json";
+const fs = require("fs");
+const path = require("path");
+
+const PACKAGE_ROOT = path.join(__dirname, "..", "nodejs");
+
+const pkgPackageConfigFile = path.join(PACKAGE_ROOT, "package.json");
 const pkg = require(pkgPackageConfigFile);
 
 const { main } = pkg;
 const esmMain = main.replace(/\.js$/, ".mjs");
 
-const cjs = fs.readFileSync(`./nodejs/${main}`, "utf8");
+const cjs = fs.readFileSync(join(PACKAGE_ROOT, main), "utf8");
 
 const esm =
   "const module = {exports:{}};" +
@@ -37,7 +43,7 @@ function* getExports(input) {
   }
 }
 
-fs.writeFileSync(`./nodejs/${esmMain}`, esm);
+fs.writeFileSync(path.join(PACKAGE_ROOT, esmMain), esm);
 
 // Mutate package.json
 pkg.module = esmMain;
