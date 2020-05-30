@@ -27,7 +27,7 @@ jobs:
       - name: Upload artifact
         uses: actions/upload-artifact@v1
         with:
-          name: aduh95-toml-unreleased-${{ github.sha }}.tar.gz
+          name: npm-tarball
           path: aduh95-toml-unreleased.tar.gz
 
   test-node:
@@ -43,11 +43,11 @@ jobs:
       - name: Download tarball
         uses: actions/download-artifact@v1
         with:
-          name: aduh95-toml-unreleased-${{ github.sha }}.tar.gz
+          name: npm-tarball
       - name: Extract tarball
-        run:
-          tar --strip-components=1 -xzf aduh95-toml-unreleased-${{ github.sha
-          }}.tgz
+        run: >
+          tar --strip-components=1 -xzf
+          npm-tarball/aduh95-toml-unreleased.tar.gz
       - name: Install Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         env:
@@ -70,11 +70,11 @@ jobs:
       - name: Download tarball
         uses: actions/download-artifact@v1
         with:
-          name: aduh95-toml-unreleased-${{ github.sha }}.tar.gz
+          name: npm-tarball
       - name: Extract tarball
-        run:
-          tar --strip-components=1 -xzf aduh95-toml-unreleased-${{ github.sha
-          }}.tgz
+        run: >
+          tar --strip-components=1 -xzf
+          npm-tarball/aduh95-toml-unreleased.tar.gz
       - name: Install Deno ${{ matrix.deno }}
         run:
           curl -fsSL https://deno.land/x/install/install.sh | sudo
