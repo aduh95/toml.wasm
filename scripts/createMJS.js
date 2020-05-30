@@ -12,7 +12,7 @@ const pkg = require(pkgPackageConfigFile);
 const { main } = pkg;
 const esmMain = main.replace(/\.js$/, ".mjs");
 
-const cjs = fs.readFileSync(join(PACKAGE_ROOT, main), "utf8");
+const cjs = fs.readFileSync(path.join(PACKAGE_ROOT, main), "utf8");
 
 const esm =
   "const module = {exports:{}};" +
