@@ -39,10 +39,15 @@ jobs:
         node: [10.x, 12.x, 14.x]
 
     steps:
+      - uses: actions/checkout@v2
       - name: Download tarball
         uses: actions/download-artifact@v1
         with:
           name: aduh95-toml-unreleased-${{ github.sha }}.tar.gz
+      - name: Extract tarball
+        run:
+          tar --strip-components=1 -xzf aduh95-toml-unreleased-${{ github.sha
+          }}.tgz
       - name: Install Node.js ${{ matrix.node }}
         uses: actions/setup-node@v1
         env:
@@ -61,10 +66,15 @@ jobs:
         node: [1.0.3]
 
     steps:
+      - uses: actions/checkout@v2
       - name: Download tarball
         uses: actions/download-artifact@v1
         with:
           name: aduh95-toml-unreleased-${{ github.sha }}.tar.gz
+      - name: Extract tarball
+        run:
+          tar --strip-components=1 -xzf aduh95-toml-unreleased-${{ github.sha
+          }}.tgz
       - name: Install Deno ${{ matrix.deno }}
         run:
           curl -fsSL https://deno.land/x/install/install.sh | sudo
