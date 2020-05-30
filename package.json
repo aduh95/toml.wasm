@@ -43,7 +43,9 @@
     "build:all": "npm run build:cjs && npm run build:esm && npm run build:web",
     "build": "npm run build:all && node ./scripts/updatePackageExports.js",
     "version": "node scripts/updateCargoVersion.js && git add Cargo.toml",
-    "test": "node tests/cjs.js && node tests/esm.mjs && deno test --allow-read tests/deno.ts"
+    "test:node": "node tests/cjs.js && node tests/esm.mjs",
+    "test:deno": "deno test --allow-read tests/deno.ts",
+    "test": "npm run test:node && npm run test:deno"
   },
   "main": "./nodejs/toml2js.js",
   "module": "./web/toml2js.js",
