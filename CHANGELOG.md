@@ -1,5 +1,9 @@
 # ChangeLog
 
+### v0.3.1 (2020-06-01)
+
+Fix release script.
+
 ### v0.3.0 (2020-06-01)
 
 - Add web version.

@@ -26,6 +26,6 @@ crate-type = ["cdylib", "rlib"]
 authors = ["Antoine du Hamel <duhamelantoine199@gmail.com>", "Pascal Seitz <pascal.seitz@sap.com>"]
 edition = "2018"
 name = "toml2js"
-version = "0.3.0"
+version = "0.3.1"
 [profile.release]
 opt-level = "s"
