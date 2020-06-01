@@ -1,6 +1,6 @@
 {
   "name": "@aduh95/toml",
-  "version": "0.2.1",
+  "version": "0.3.0",
   "description": "This package contains methods for parsing Tom's Obvious, Minimal Language (TOML) and converting values to TOML.",
   "keywords": [
     "toml",
