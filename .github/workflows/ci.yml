@@ -36,7 +36,11 @@ jobs:
 
     strategy:
       matrix:
-        node: [10.x, 12.x, 14.x]
+        node: [12.17.0, 14]
+        supportsESM: [true]
+        include:
+          - node: 10
+            supportsESM: false
 
     steps:
       - uses: actions/checkout@v2
@@ -49,13 +53,22 @@ jobs:
           tar --strip-components=1 -xzf
           npm-tarball/aduh95-toml-unreleased.tar.gz
       - name: Install Node.js ${{ matrix.node }}
-        uses: actions/setup-node@v1
+        uses: actions/setup-node@v2-beta
         env:
           RUNNER_TEMP: /tmp
         with:
           node-version: ${{ matrix.node }}
-      - name: Run tests
-        run: npm run test:node
+      - name: Create symlink for Node version with no self-reference support
+        if: matrix.supportsESM == false
+        run: >
+          node -e 'require.resolve("@aduh95/toml")' || ( mkdir -p
+          node_modules/@aduh95 && ln -s $GITHUB_WORKSPACE
+          node_modules/@aduh95/toml)
+      - name: Run tests CommonJS
+        run: npm run test:cjs
+      - name: Run tests ESM
+        if: matrix.supportsESM
+        run: npm run test:esm
 
   test-deno:
     runs-on: ubuntu-latest
