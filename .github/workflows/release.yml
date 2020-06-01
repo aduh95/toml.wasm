@@ -7,7 +7,7 @@ on:
 name: Create Release
 
 jobs:
-    build:
+  build:
     runs-on: ubuntu-latest
 
     steps:
@@ -61,7 +61,9 @@ jobs:
       - name: Publish to NPM
         if: success()
         id: publish
-        run: npm publish npm-tarball/aduh95-toml-release.tar.gz ${{ steps.release_info.outputs.NPM_FLAGS }}
+        run:
+          npm publish npm-tarball/aduh95-toml-release.tar.gz ${{
+          steps.release_info.outputs.NPM_FLAGS }}
         env:
           NODE_AUTH_TOKEN: ${{ secrets.NPM_AUTH_TOKEN }}
       - name: Create Release
