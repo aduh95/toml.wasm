@@ -81,7 +81,7 @@ happen asynchronously. You must call the `TOML.default` function before using
 the `parse` and `stringify` methods.
 
 ```js
-import * as TOML from "https://unpckg.com/@aduh95/toml/web/toml2js.js";
+import * as TOML from "https://unpkg.com/@aduh95/toml/web/toml2js.js";
 
 // Init the module
 await TOML.default();
@@ -98,6 +98,9 @@ const jsObject = TOML.parse(`pi=3.1415`);
 
 Works same as the browser API.
 
+If you are using the CDN version, you need to pass the `allow-net` flag in order
+for `TOML.default` to download the WASM file.
+
 If you are working from your local file system, you can pass the WASM file
 directly to the `TOML.default` function in addition with the `--allow-read` CLI
 flag.
@@ -105,9 +108,7 @@ flag.
 ```js
 import * as TOML from "/path/to/toml2js.js";
 // Init the module when the wasm file is on the file system
-const wasmFile = await Deno.open("/path/to/toml2js_bg.wasm");
-await TOML.default(await Deno.readAll(wasmFile));
-wasmFile.close();
+await TOML.default(await Deno.readFile("/path/to/toml2js_bg.wasm"));
 ```
 
 ### Limitations

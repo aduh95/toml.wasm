@@ -2,9 +2,7 @@ import * as TOML from "../web/toml2js.js";
 
 const PROJECT_ROOT = ".";
 
-const wasmFile = await Deno.open(PROJECT_ROOT + "/web/toml2js_bg.wasm");
-await TOML.default(await Deno.readAll(wasmFile));
-wasmFile.close();
+await TOML.default(await Deno.readFile(PROJECT_ROOT + "/web/toml2js_bg.wasm"));
 
 Deno.test({
   name: "simpleTranscription",
