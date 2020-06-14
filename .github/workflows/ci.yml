@@ -76,7 +76,7 @@ jobs:
 
     strategy:
       matrix:
-        node: [1.0.3]
+        node: [1.1.0]
 
     steps:
       - uses: actions/checkout@v2
