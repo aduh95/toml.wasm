@@ -1,5 +1,11 @@
 # ChangeLog
 
+### v0.4.0 (2021-01-22)
+
+`TOML.parse`: Add support for `TypedArray` containing `UTF-8` strings. This is
+useful to pass trusted data directly to the Rust backend without having to
+decode it to a JavaScript string then encode it back to memory.
+
 ### v0.3.2 (2020-06-01)
 
 Fix release script.

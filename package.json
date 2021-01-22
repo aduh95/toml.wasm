@@ -34,12 +34,13 @@
     "nodejs/toml2js.mjs",
     "web/toml2js_bg.wasm",
     "web/toml2js.js",
-    "web/toml2js.d.ts"
+    "web/toml2js.d.ts",
+    "types.d.ts"
   ],
   "scripts": {
-    "build:cjs": "wasm-pack build --release --target nodejs -d nodejs",
+    "build:cjs": "wasm-pack build --release --target nodejs -d nodejs && node ./scripts/patchCJS.js",
     "build:esm": "node ./scripts/createMJS.js",
-    "build:web": "wasm-pack build --release --target web -d web",
+    "build:web": "wasm-pack build --release --target web -d web && node ./scripts/patchBrowser.js",
     "build:all": "npm run build:cjs && npm run build:esm && npm run build:web",
     "build": "npm run build:all && node ./scripts/updatePackageExports.js",
     "version": "node scripts/updateCargoVersion.js && git add Cargo.toml",

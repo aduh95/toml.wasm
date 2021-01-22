@@ -7,7 +7,7 @@ await TOML.default(
 );
 
 Deno.test({
-  name: "simpleTranscription",
+  name: "simple transcription",
   async fn(): Promise<void> {
     const [actual, expected] = await Promise.all([
       Deno.readTextFile(new URL("tests/input.toml", PROJECT_ROOT)).then(
@@ -15,6 +15,21 @@ Deno.test({
       ),
       Deno.readTextFile(new URL("tests/output.json", PROJECT_ROOT)).then(
         JSON.parse
+      ),
+    ]);
+    if (!isDeepEqual(actual, expected))
+      return Promise.reject(new Error("ASSERTION ERROR: test data mismatch."));
+  },
+});
+Deno.test({
+  name: "transcription from binary data",
+  async fn(): Promise<void> {
+    const [actual, expected] = await Promise.all([
+      Deno.readFile(new URL("tests/input.toml", PROJECT_ROOT)).then(
+        TOML.parse as any
+      ),
+      Deno.readTextFile(new URL("tests/output.json", PROJECT_ROOT)).then(
+        JSON.parse as any
       ),
     ]);
     if (!isDeepEqual(actual, expected))

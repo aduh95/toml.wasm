@@ -5,6 +5,10 @@ const TOML = require("@aduh95/toml");
 
 assert.deepStrictEqual(
   TOML.parse(readFileSync(join(__dirname, "input.toml"), "utf8")),
+  JSON.parse(readFileSync(join(__dirname, "output.json"), "utf8"))
+);
+assert.deepStrictEqual(
+  TOML.parse(readFileSync(join(__dirname, "input.toml"))),
   JSON.parse(readFileSync(join(__dirname, "output.json")))
 );
 
