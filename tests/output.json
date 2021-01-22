@@ -1,7 +1,8 @@
 {
   "package": {
     "name": "@aduh95/toml",
-    "version": "0.2.0"
+    "version": "0.2.0",
+    "random_unicode_char": "🤯"
   },
   "dependencies": {
     "serde-transcode": "1.1.0",
