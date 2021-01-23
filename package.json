@@ -38,9 +38,9 @@
     "types.d.ts"
   ],
   "scripts": {
-    "build:cjs": "wasm-pack build --release --target nodejs -d nodejs && node ./scripts/patchCJS.js",
+    "build:cjs": "wasm-pack build --release --target nodejs -d nodejs && node ./scripts/supportPassingBuffer.js ./nodejs main",
     "build:esm": "node ./scripts/createMJS.js",
-    "build:web": "wasm-pack build --release --target web -d web && node ./scripts/patchBrowser.js",
+    "build:web": "wasm-pack build --release --target web -d web && node ./scripts/supportPassingBuffer.js ./web module",
     "build:all": "npm run build:cjs && npm run build:esm && npm run build:web",
     "build": "npm run build:all && node ./scripts/updatePackageExports.js",
     "version": "node scripts/updateCargoVersion.js && git add Cargo.toml",

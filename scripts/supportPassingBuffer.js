@@ -9,14 +9,16 @@ const assert = require("assert");
 const fs = require("fs");
 const path = require("path");
 
-const PACKAGE_ROOT = path.join(__dirname, "..", "web");
+const [, , folder, main] = process.argv;
+
+const PACKAGE_ROOT = path.resolve(folder);
 
 const pkgPackageConfigFile = path.join(PACKAGE_ROOT, "package.json");
 const pkg = require(pkgPackageConfigFile);
 
-const { module: main, types } = pkg;
+const { types } = pkg;
 {
-  const cjs = fs.openSync(path.join(PACKAGE_ROOT, main), "r+");
+  const cjs = fs.openSync(path.join(PACKAGE_ROOT, pkg[main]), "r+");
 
   const needle = `function passStringToWasm0(arg, malloc, realloc) {
 

@@ -1,31 +1,25 @@
 [dependencies]
-toml = "^0.5.3"
-
-[dependencies.console_error_panic_hook]
-optional = true
-version = "0.1.1"
+toml = "0.5.8"
 
 [dependencies.wasm-bindgen]
 features = ["serde-serialize"]
-version = "^0.2"
-
-[dependencies.wee_alloc]
-optional = true
-version = "0.4.2"
+version = "0.2.69"
 
 [dev-dependencies]
 wasm-bindgen-test = "0.2"
-
-[features]
-default = ["console_error_panic_hook"]
 
 [lib]
 crate-type = ["cdylib", "rlib"]
 
 [package]
-authors = ["Antoine du Hamel <duhamelantoine199@gmail.com>", "Pascal Seitz <pascal.seitz@sap.com>"]
+authors = [
+    "Antoine du Hamel <duhamelantoine199@gmail.com>",
+    "Pascal Seitz <pascal.seitz@sap.com>",
+]
 edition = "2018"
 name = "toml2js"
 version = "0.4.0"
+[package.metadata.wasm-pack.profile.release]
+wasm-opt = ["-Oz", "--enable-mutable-globals"]
 [profile.release]
-opt-level = "s"
+opt-level = "z"

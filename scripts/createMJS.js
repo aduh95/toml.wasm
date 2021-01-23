@@ -18,8 +18,8 @@ const esm =
   "const module = {exports:{}};" +
   cjs
     .replace(
-      "const { TextDecoder } = require(String.raw`util`)",
-      "import{TextDecoder}from'util'"
+      "const { TextDecoder, TextEncoder } = require(String.raw`util`)",
+      "import{TextDecoder,TextEncoder}from'util'"
     )
     .replace(
       /const path = require\('path'\)\.join\(__dirname,(.+)\)/,
