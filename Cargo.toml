@@ -12,13 +12,10 @@ wasm-bindgen-test = "0.2"
 crate-type = ["cdylib", "rlib"]
 
 [package]
-authors = [
-    "Antoine du Hamel <duhamelantoine199@gmail.com>",
-    "Pascal Seitz <pascal.seitz@sap.com>",
-]
+authors = ["Antoine du Hamel <duhamelantoine199@gmail.com>", "Pascal Seitz <pascal.seitz@sap.com>"]
 edition = "2018"
 name = "toml2js"
-version = "0.4.0"
+version = "0.4.1"
 [package.metadata.wasm-pack.profile.release]
 wasm-opt = ["-Oz", "--enable-mutable-globals"]
 [profile.release]
