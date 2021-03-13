@@ -16,14 +16,16 @@ pkg.files = [
 ];
 pkg.exports = {
   ".": {
-    require: `./nodejs/${require("../nodejs/package.json").main}`,
-    import: `./nodejs/${require("../nodejs/package.json").module}`,
-    browser: `./web/${require("../web/package.json").module}`,
+    node: {
+      require: `./nodejs/${require("../nodejs/package.json").main}`,
+      import: `./nodejs/${require("../nodejs/package.json").module}`,
+    },
+    default: `./web/${require("../web/package.json").module}`,
   },
 };
-pkg.main = pkg.exports["."].require;
-pkg.module = pkg.exports["."].browser;
-pkg.browser = pkg.exports["."].browser;
+pkg.main = pkg.exports["."].node.require;
+pkg.module = pkg.exports["."].default;
+pkg.browser = pkg.exports["."].default;
 
 fs.writeFileSync(
   require.resolve("../package.json"),
