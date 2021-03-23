@@ -1,5 +1,15 @@
 # ChangeLog
 
+### v0.4.2 (2021-03-23)
+
+Fix package exports.
+
+### v0.4.1 (2021-03-13)
+
+- Improve package exports
+- Fix TS types
+- Add more tests
+
 ### v0.4.0 (2021-01-22)
 
 `TOML.parse`: Add support for `TypedArray` containing `UTF-8` strings. This is
