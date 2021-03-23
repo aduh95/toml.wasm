@@ -26,6 +26,10 @@
         "import": "./nodejs/toml2js.mjs"
       },
       "default": "./web/toml2js.js"
+    },
+    "./wasm": {
+      "node": "./nodejs/toml2js_bg.wasm",
+      "default": "./web/toml2js_bg.wasm"
     }
   },
   "files": [
